@@ -1,7 +1,9 @@
 ﻿using Business.Abstract;
 using Entities.Concrete;
+using Entities.DTO;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Linq.Expressions;
 
 namespace TaskEmployeeAPI.Controllers
 {
@@ -86,5 +88,23 @@ namespace TaskEmployeeAPI.Controllers
 
             return NotFound("No employees found.");
         }
+
+        [HttpGet("GetFilteredEmployees")]
+        public IActionResult GetFilteredEmployees(string department = null, string company = null)
+        {
+            Expression<Func<EmployeeDetailDto, bool>> filter = e =>
+                (string.IsNullOrEmpty(department) || e.DepartmentName.Contains(department)) &&
+                (string.IsNullOrEmpty(company) || e.CompanyName.Contains(company));
+
+            var filteredEmployees = _employeeService.GetFilteredEmployees(filter);
+
+            if (filteredEmployees.Count > 0)
+            {
+                return Ok(filteredEmployees);
+            }
+
+            return NotFound("No employees match the given criteria.");
+        }
+
     }
 }

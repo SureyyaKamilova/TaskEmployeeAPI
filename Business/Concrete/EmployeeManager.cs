@@ -14,6 +14,7 @@ namespace Business.Concrete
 {
     public class EmployeeManager:EntityManager<Employee>,IEmployeeService
     {
+
         private readonly IEmployeeDal _employeedal;
         public EmployeeManager(IEmployeeDal employeeDal) : base(employeeDal)
         {
@@ -40,6 +41,12 @@ namespace Business.Concrete
         public List<EmployeeDetailDto> GetEmployeesWithPagination(int pageNumber, int pageSize)
         {
             return _employeedal.GetEmployeesWithPagination(pageNumber, pageSize);
+        }
+
+        
+        public List<EmployeeDetailDto> GetFilteredEmployees(Expression<Func<EmployeeDetailDto, bool>> filter)
+        {
+            return _employeedal.GetFilteredEmployees(filter);
         }
     }
 }
