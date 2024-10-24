@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace Entities.DTO
 {
-    public class EmployeeDetail
+    public class EmployeeDetailDto
     {
         public int Id { get; set; }
         public string Name { get; set; }
         public string Surname { get; set; }
-        public DateTime CreateDate { get; set; }
+        public DateTime BirthDate { get; set; }
         public string DepartmentName { get; set; }
         public string CompanyName { get; set; }
     }
