@@ -13,7 +13,7 @@ namespace DataAccess.Concrete.EntityFramework
 {
     public class EmployeeDal : BaseEntityRepository<Employee, Context>, IEmployeeDal
     {
-        public List<EmployeeDetailDto> GetAllEmployees()
+        public List<EmployeeDetailDto> GetAllEmployeesDetails()
         {
             Context context = new Context();
             var result = from e in context.Employees

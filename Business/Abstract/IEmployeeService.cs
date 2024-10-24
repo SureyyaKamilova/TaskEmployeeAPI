@@ -1,4 +1,5 @@
-﻿using Core.DataAccess.Abstract;
+﻿using Core.Business.Abstract;
+using Core.Entities.Abstract;
 using Entities.Concrete;
 using Entities.DTO;
 using System;
@@ -8,9 +9,9 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DataAccess.Abstract
+namespace Business.Abstract
 {
-    public interface IEmployeeDal:IBaseRepository<Employee>
+    public interface IEmployeeService:IEntityService<Employee>
     {
         List<EmployeeDetailDto> GetAllEmployeesDetails();
         EmployeeDetailDto GetEmployeeDetail(Expression<Func<EmployeeDetailDto, bool>> filter);
