@@ -14,5 +14,7 @@ namespace DataAccess.Abstract
     {
         List<EmployeeDetailDto> GetAllEmployeesDetails();
         EmployeeDetailDto GetEmployeeDetail(Expression<Func<EmployeeDetailDto, bool>> filter);
+        List<EmployeeDetailDto> GetEmployeesWithPagination(int pageNumber, int pageSize);
+
     }
 }

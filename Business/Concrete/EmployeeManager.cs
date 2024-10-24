@@ -37,5 +37,9 @@ namespace Business.Concrete
 
         }
 
+        public List<EmployeeDetailDto> GetEmployeesWithPagination(int pageNumber, int pageSize)
+        {
+            return _employeedal.GetEmployeesWithPagination(pageNumber, pageSize);
+        }
     }
 }

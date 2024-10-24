@@ -52,5 +52,29 @@ namespace DataAccess.Concrete.EntityFramework
                          };
             return result.Where(filter).FirstOrDefault();
         }
+
+        public List<EmployeeDetailDto> GetEmployeesWithPagination(int pageNumber, int pageSize)
+        {
+            using var context = new Context();
+            var result = from e in context.Employees
+                         join d in context.Departments
+                         on e.DepartmentId equals d.Id
+                         join c in context.Companies
+                         on d.CompanyId equals c.Id
+                         select new EmployeeDetailDto
+                         {
+                             Id = e.Id,
+                             Name = e.Name,
+                             Surname = e.Surname,
+                             BirthDate = e.BirthDate,
+                             DepartmentName = d.Name,
+                             CompanyName = c.Name
+                         };
+            var pagedResult = result.Skip((pageNumber - 1) * pageSize)
+                                    .Take(pageSize)
+                                    .ToList();
+
+            return pagedResult;
+        }
     }
 }

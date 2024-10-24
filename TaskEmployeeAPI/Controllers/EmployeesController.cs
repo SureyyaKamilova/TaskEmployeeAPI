@@ -73,5 +73,18 @@ namespace TaskEmployeeAPI.Controllers
             _employeeService.Delete(employee);
             return Ok("Deleted employee");
         }
+
+        [HttpGet("GetEmployeesWithPagination")]
+        public IActionResult GetEmployeesWithPagination(int pageNumber = 1, int pageSize = 10)
+        {
+            var employees = _employeeService.GetEmployeesWithPagination(pageNumber, pageSize);
+
+            if (employees.Count > 0)
+            {
+                return Ok(employees);
+            }
+
+            return NotFound("No employees found.");
+        }
     }
 }
